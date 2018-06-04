@@ -93,16 +93,30 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 16 "tiger.y"
+#line 18 "tiger.y"
 
 	int pos;
 	int ival;
 	string sval;
+  A_exp exp;
+  A_expList expList;
+  A_dec dec;
+  A_decList decList;
+  A_fundec fundec;
+  A_fundecList fundecList;
+  A_ty ty;
+  A_namety namety;
+  A_nametyList nametyList;
+  //A_field field;
+  A_fieldList fieldList;
+  //A_efield efield;
+  A_efieldList efieldList; 
+  A_var var;
 	
 
 
 /* Line 1676 of yacc.c  */
-#line 106 "tiger.tab.h"
+#line 120 "tiger.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

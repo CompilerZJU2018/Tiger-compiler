@@ -66,7 +66,7 @@ A_exp tree_root;
 %type <ty> ty
 %type <namety> tydec
 %type <nametyList> tydecs 
-%type <fieldList> tyfields
+%type <fieldList> tyfields tyfield
 %type <efieldList> asm
 %type <var> lvalue lvalue_not_ID
 
@@ -99,7 +99,7 @@ ty  : ID                          {$$ = A_NameTy(EM_tokPos, S_Symbol($1));}
   |   ARRAY OF ID                 {$$ = A_ArrayTy(EM_tokPos, S_Symbol($3));}
   ;
 
-tyfields  : 
+tyfields  :                       {$$ = NULL;}
   |   tyfield COMMA tyfields      {$$ = A_FieldList($1, $3);}
   |   tyfield                     {$$ = A_FieldList($1, NULL);}
   ;
@@ -133,7 +133,7 @@ exp : ID                      {$$ = A_VarExp(EM_tokPos, A_SimpleVar(EM_tokPos, S
   |   LPAREN RPAREN           {$$ = A_SeqExp(EM_tokPos, null);}
   |   INT                     {$$ = A_IntExp(EM_tokPos, $1);}
   |   STRING                  {$$ = A_StringExp(EM_tokPos, $1);}
-  |   MINUS exp %prec UMINUS  {$$ = A_OpExp(EM_tokPos, A_minusOp, A_IntExp(EM_tokPos, 0), $1);}
+  |   MINUS exp %prec UMINUS  {$$ = A_OpExp(EM_tokPos, A_minusOp, A_IntExp(EM_tokPos, 0), $2);}
 
   |   exp PLUS exp            {$$ = A_OpExp(EM_tokPos, A_plusOp, $1, $3);}
   |   exp MINUS exp           {$$ = A_OpExp(EM_tokPos, A_minusOp, $1, $3);}
