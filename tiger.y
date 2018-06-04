@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include "util.h"
 #include "errormsg.h"
+#include "absyn.h"
+#include "symbol.h"
+
 #define YYDEBUG 1
 
 int yylex(void); /* function prototype */
