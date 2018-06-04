@@ -52,9 +52,13 @@ decs  : dec decs   {$$ = A_DecList($1, $2);}
   |                {$$ = NULL;}
   ;
 
-dec : tydec     {$$ = A_TypeDec(EM_tokPos, $1);}
+dec : tydecs     {$$ = A_TypeDec(EM_tokPos, $1);}
   |   vardec    {$$ = $1;}
-  |   funcdec   {$$ = A_FunctionDec(EM_tokPos, $1);}
+  |   funcdecs   {$$ = A_FunctionDec(EM_tokPos, $1);}
+  ;
+
+tydecs  : tydec tydecs
+  | 
   ;
 
 tydec : TYPE ID EQ ty
@@ -77,6 +81,9 @@ vardec  : VAR ID ASSIGN exp       {$$ = A_VarDec(EM_tokPos, S_Symbol($2), NULL, 
   |   VAR ID COLON ID ASSIGN exp  {$$ = A_VarDec(EM_tokPos, S_Symbol($2), S_Symbol($4), $6);}
   ;
 
+funcdecs :  funcdec funcdecs
+  |   
+  ;
 funcdec : FUNCTION ID LPAREN tyfields RPAREN EQ exp       {$$ = A_Fundec(EM_tokPos, S_Symbol($2), $4, NULL, $7);}
   |   FUNCTION ID LPAREN tyfields RPAREN COLON ID EQ exp  {$$ = A_Fundec(EM_tokPos, S_Symbol($2), $4, S_Symbol($7), $9);}
   ;
