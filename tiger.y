@@ -58,8 +58,8 @@ A_exp absyn_root;
 %left TIMES DIVIDE
 %left UMINUS
 
-%type <exp> program exp parameter
-%type <expList> expseq
+%type <exp> program exp
+%type <expList> expseq parameter
 %type <dec> dec vardec
 %type <decList> decs
 %type <fundec> funcdec
